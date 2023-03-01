@@ -21,6 +21,19 @@
         <param name="viz" value="true" />
     </node>
 
+    <node pkg="velocity_estimator" name="state_pub1" type="state_pub.py" output="screen">
+        <param name="veh_id" value="1" />
+    </node>
+    <node pkg="velocity_estimator" name="state_pub2" type="state_pub.py" output="screen">
+        <param name="veh_id" value="2" />
+    </node>
+    <node pkg="velocity_estimator" name="state_pub3" type="state_pub.py" output="screen">
+        <param name="veh_id" value="3"/>
+    </node>
+    <node pkg="velocity_estimator" name="state_pub4" type="state_pub.py" output="screen">
+        <param name="veh_id" value="4" />
+    </node>
+
     <!-- Launch  map server-->
     <group if="$(arg map_server)">
         <include file="$(find mushr_sim)/launch/map_server.launch">

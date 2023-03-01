@@ -2,7 +2,8 @@
 #include "body_ros_connector.h"
 #include "mjglobal.h"
 #include "mushr_mujoco_util.h"
-
+#include "ros/console.h"
+#include <std_msgs/String.h>
 namespace mushr_mujoco_ros {
 
 MuSHRROSConnector::MuSHRROSConnector(ros::NodeHandle* nh, const YAML::Node& e)
@@ -20,15 +21,18 @@ MuSHRROSConnector::MuSHRROSConnector(ros::NodeHandle* nh, const YAML::Node& e)
     {
         control_topic = e["control_topic"].as<std::string>();
     }
+    std::string a = pvt_name("") + " has useacc " + std::to_string(use_accel_control_); 
+    ROS_INFO("%s", a.c_str());
     control_sub_ = nh_->subscribe(
         pvt_name(control_topic), 1, &MuSHRROSConnector::control_cb, this);
-
+    
     nh->getParam(pvt_name(accel_control), use_accel_control_);
-
+    a = "Car "+ pvt_name("") + " has useacc " + std::to_string(use_accel_control_); 
+    ROS_INFO("%s", a.c_str());
+    
     std::string tv = car_ref("throttle_velocity");
     std::string ta = car_ref("throttle_acceleration");
     std::string sp = car_ref("steering_pos");
-
     if (use_accel_control_) {
         acceleration_ctrl_idx_ = mushr_mujoco_util::mj_name2id_ordie(m, mjOBJ_ACTUATOR, ta);
     } else {

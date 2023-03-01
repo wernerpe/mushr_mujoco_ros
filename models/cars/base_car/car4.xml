@@ -24,7 +24,7 @@
       <camera name="car4_realsense_d435i" mode="fixed" pos="-0.005 0 .165" euler="0 4.712 4.712"/>
       <site name="car4_imu" pos="-0.005 0 .165"/>
 
-      <geom pos="0 0 0.094655" type="mesh" mass="3.542137" mesh="car4_mushr_base_nano"/>
+      <geom pos="0 0 0.094655" type="mesh" mass="3.542137" mesh="car4_mushr_base_nano" rgba="0.4 0.0 0.8 1"/>
       <geom name="car4_realsense_d435i" size="0.012525 0.045 0.0125" pos="0.0123949 0 0.162178" mass="0.072" type="box"/>
       <geom name="car4_ydlidar" pos="-0.035325 0 0.202405" type="mesh" mass="0.180" mesh="car4_mushr_ydlidar"/>
 
@@ -57,10 +57,15 @@
       </body>
     </body>
   </worldbody>
-  <actuator>
+  <!-- <actuator>
     <position class="car4_steering" kp="25.0" name="car4_steering_pos" joint="car4_steering_wheel"/>
     <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car4_throttle_velocity" tendon="car4_throttle"/>
+  </actuator> -->
+  <actuator>
+    <position class="car4_steering" kp="25.0" name="car4_steering_pos" joint="car4_steering_wheel"/>
+    <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car4_throttle_acceleration" tendon="car4_current"/>
   </actuator>
+  
   <equality>
     <!-- taylor expansion of delta_l = arctan(L/(L/tan(delta) - W/2)) with L,W in reference to kinematic car model -->
     <joint joint1="car4_wheel_fl_steering" joint2="car4_steering_wheel" polycoef="0 1 0.375 0.140625 -0.0722656"/>
@@ -70,6 +75,14 @@
   </equality>
   <tendon>
     <fixed name="car4_throttle">
+      <joint joint="car4_wheel_fl_throttle" coef="0.25"/>
+      <joint joint="car4_wheel_fr_throttle" coef="0.25"/>
+      <joint joint="car4_wheel_bl_throttle" coef="0.25"/>
+      <joint joint="car4_wheel_br_throttle" coef="0.25"/>
+    </fixed>
+  </tendon>
+  <tendon>
+    <fixed name="car4_current">
       <joint joint="car4_wheel_fl_throttle" coef="0.25"/>
       <joint joint="car4_wheel_fr_throttle" coef="0.25"/>
       <joint joint="car4_wheel_bl_throttle" coef="0.25"/>

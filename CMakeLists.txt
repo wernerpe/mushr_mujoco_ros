@@ -121,8 +121,11 @@ endif()
 
 message(STATUS ${MUJOCO_LOCATION})
 
-set(MUJOCO_INCLUDE_DIR ${MUJOCO_LOCATION}/include)
+set(MUJOCO_INCLUDE_DIR ${MUJOCO_LOCATION}/include/mujoco)
+set(MUJOCO_INCLUDE_DIR_2 ${MUJOCO_LOCATION}/include)
 set(MUJOCO_LIB ${MUJOCO_LOCATION}/lib)
+
+message(STATUS ${MUJOCO_INCLUDE_DIR})
 
 link_directories(${MUJOCO_LIB})
 
@@ -135,7 +138,7 @@ endif()
 file(GLOB LIB_GLEW ${MUJOCO_LIB}/libglew.so)
 #Showing mujoco library found
 message(STATUS "MuJoCo lib found at: " ${LIB_MUJOCO})
-
+message(STATUS "MuJoCo include dir found at: " ${MUJOCO_INCLUDE_DIR})
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -165,9 +168,14 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${GLEW_INCLUDE_DIRS}
   ${MUJOCO_INCLUDE_DIR}
+  ${MUJOCO_INCLUDE_DIR_2}
   ${yaml-cpp_INCLUDE_DIRS}
 )
 
+get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+foreach(dir ${dirs})
+  message(STATUS "dir='${dir}'")
+endforeach()
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/mushr_mujoco_ros.cpp

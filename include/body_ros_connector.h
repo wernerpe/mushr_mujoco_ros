@@ -3,7 +3,6 @@
 
 #include "ros/ros.h"
 #include "yaml-cpp/yaml.h"
-
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 #include <mushr_mujoco_ros/BodyState.h>

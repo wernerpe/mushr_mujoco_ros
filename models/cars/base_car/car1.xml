@@ -15,6 +15,9 @@
     <default class="car1_throttle">
       <joint type="hinge" axis="0 1 0" frictionloss="0.001" damping="0.01" armature="0.01" limited="false"/>
     </default>
+     <default class="car1_current">
+      <joint type="hinge" axis="0 1 0" frictionloss="0.001" damping="0.01" armature="0.01" limited="false"/>
+    </default>
   </default>
   <worldbody>
     <body name="car1" pos="0.0 1.0 0.0" euler="0 0 0.0">
@@ -35,23 +38,23 @@
 
       <body name="car1_wheel_fl" pos="0.1385 0.115 0.0488">
         <joint class="car1_steering" name="car1_wheel_fl_steering"/>
-        <joint class="car1_throttle" name="car1_wheel_fl_throttle"/>
+        <joint class="car1_current" name="car1_wheel_fl_throttle"/>
         <geom class="car1_wheel"/>
         <geom class="car1_wheel" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 0.3"/>
       </body>
       <body name="car1_wheel_fr" pos="0.1385 -0.115 0.0488">
         <joint class="car1_steering" name="car1_wheel_fr_steering"/>
-        <joint class="car1_throttle" name="car1_wheel_fr_throttle"/>
+        <joint class="car1_current" name="car1_wheel_fr_throttle"/>
         <geom class="car1_wheel"/>
         <geom class="car1_wheel" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 0.3"/>
       </body>
       <body name="car1_wheel_bl" pos="-0.158 0.115 0.0488">
-        <joint class="car1_throttle" name="car1_wheel_bl_throttle"/>
+        <joint class="car1_current" name="car1_wheel_bl_throttle"/>
         <geom class="car1_wheel"/>
         <geom class="car1_wheel" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 0.3"/>
       </body>
       <body name="car1_wheel_br" pos="-0.158 -0.115 0.0488">
-        <joint class="car1_throttle" name="car1_wheel_br_throttle"/>
+        <joint class="car1_current" name="car1_wheel_br_throttle"/>
         <geom class="car1_wheel"/>
         <geom class="car1_wheel" type="mesh" contype="0" conaffinity="0" group="1" rgba="1 1 1 0.3"/>
       </body>
@@ -63,7 +66,8 @@
   </actuator> -->
   <actuator>
     <position class="car1_steering" kp="25.0" name="car1_steering_pos" joint="car1_steering_wheel"/>
-    <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
+    <motor gear="10.0" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
+    <!-- <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_velocity" tendon="car1_throttle"/> -->
   </actuator>
   
   <equality>

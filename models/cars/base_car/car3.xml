@@ -63,7 +63,9 @@
   </actuator> -->
   <actuator>
     <position class="car3_steering" kp="25.0" name="car3_steering_pos" joint="car3_steering_wheel"/>
-    <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car3_throttle_acceleration" tendon="car3_current"/>
+    <!-- <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car3_throttle_acceleration" tendon="car3_current"/> -->
+    <motor gear="10.0" forcelimited="true" forcerange="-500 500" name="car3_throttle_acceleration" tendon="car3_current"/>
+    
   </actuator>
   <equality>
     <!-- taylor expansion of delta_l = arctan(L/(L/tan(delta) - W/2)) with L,W in reference to kinematic car model -->

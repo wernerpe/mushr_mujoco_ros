@@ -1,13 +1,13 @@
 <launch>
     <!-- Set to 1 if you want to run the map_server -->
     <arg name="map_server" default="1"/>
-    <arg name="map_file" default="$(find mushr_sim)/maps/gates.yaml" />
+    <arg name="map_file" default="$(find mushr_mujoco_ros)/maps/room.yaml" />
     <arg name="environment" default="2v2_cars" />
 
     <!-- Could be racecar-mit, racecar-uw-tx2, or racecar-uw-nano -->
     <arg name="racecar_version" default="racecar-uw-nano" />
 
-    <include file="$(find mushr_sim)/launch/keyboard_teleop.launch.xml"/>
+    <!-- <include file="$(find mushr_sim)/launch/keyboard_teleop.launch.xml"/> -->
 
     <!--launch-prefix="xterm -e gdb - -args" -->
     <node pkg="mushr_mujoco_ros" name="mushr_mujoco_ros" type="mushr_mujoco_ros_node" output="screen">
@@ -41,6 +41,19 @@
         </include>
     </group>
 
+    <node pkg="RLKartRacing" name="rankingnode" type="car_rank_publisher.py" args="--mushr 1" output="screen">
+    </node>
+    <!-- RL nodes -->
+    <node pkg="RLKartRacing" name="rlnode1" type="hierarchical_rl_agent.py" args="--car-id 1 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    </node>
+    <node pkg="RLKartRacing" name="rlnode2" type="hierarchical_rl_agent.py" args="--car-id 2 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    </node>
+    <node pkg="RLKartRacing" name="rlnode3" type="hierarchical_rl_agent.py" args="--car-id 3 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    </node>
+    <node pkg="RLKartRacing" name="rlnode4" type="hierarchical_rl_agent.py" args="--car-id 4 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    </node>
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find RLKartRacing)/rviz/multiagent_hierarchical.rviz" />
     <!-- Launch  model/state publishers-->
     <param name="robot_description"
          textfile="$(find mushr_description)/robots/$(arg racecar_version).urdf"/>

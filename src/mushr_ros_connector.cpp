@@ -35,6 +35,7 @@ MuSHRROSConnector::MuSHRROSConnector(ros::NodeHandle* nh, const YAML::Node& e)
     std::string sp = car_ref("steering_pos");
     if (use_accel_control_) {
         acceleration_ctrl_idx_ = mushr_mujoco_util::mj_name2id_ordie(m, mjOBJ_ACTUATOR, ta);
+        ROS_INFO("ACC control idx %d", acceleration_ctrl_idx_);
     } else {
         velocity_ctrl_idx_ = mushr_mujoco_util::mj_name2id_ordie(m, mjOBJ_ACTUATOR, tv);
     }
@@ -72,6 +73,7 @@ void MuSHRROSConnector::mujoco_controller()
 
     if (use_accel_control_){
         d->ctrl[acceleration_ctrl_idx_] = acceleration_;
+        //ROS_INFO("ACC control idx %f", acceleration_);
     } else {
         d->ctrl[velocity_ctrl_idx_] = velocity_;
     }

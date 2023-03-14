@@ -66,7 +66,7 @@
   </actuator> -->
   <actuator>
     <position class="car1_steering" kp="25.0" name="car1_steering_pos" joint="car1_steering_wheel"/>
-    <motor gear="10.0" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
+    <motor gear="15.0" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
     <!-- <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_velocity" tendon="car1_throttle"/> -->
   </actuator>
   

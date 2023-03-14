@@ -44,13 +44,13 @@
     <node pkg="RLKartRacing" name="rankingnode" type="car_rank_publisher.py" args="--mushr 1" output="screen">
     </node>
     <!-- RL nodes -->
-    <node pkg="RLKartRacing" name="rlnode1" type="hierarchical_rl_agent.py" args="--car-id 1 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode1" type="hierarchical_rl_agent.py" args="--car-id 1 --mushr 1 --maxv 4.5 --use_nr_ado_obs 3" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode2" type="hierarchical_rl_agent.py" args="--car-id 2 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode2" type="hierarchical_rl_agent.py" args="--car-id 2 --mushr 1 --maxv 4.5 --use_nr_ado_obs 3" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode3" type="hierarchical_rl_agent.py" args="--car-id 3 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode3" type="hierarchical_rl_agent.py" args="--car-id 3 --mushr 1 --maxv 5.5 --use_nr_ado_obs 3" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode4" type="hierarchical_rl_agent.py" args="--car-id 4 --mushr 1 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode4" type="hierarchical_rl_agent.py" args="--car-id 4 --mushr 1 --maxv 5.5 --use_nr_ado_obs 3" output="screen">
     </node>
 
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find RLKartRacing)/rviz/multiagent_hierarchical.rviz" />

@@ -3,6 +3,7 @@
   <asset>
     <mesh name="car1_mushr_base_nano" file="mushr_base_nano.stl"/>
     <mesh name="car1_mushr_wheel" file="mushr_wheel.stl"/>
+    <mesh name="car1_shell_mesh" file="mesh_medpoly.stl" scale="0.29 0.29 0.29"/>
     <mesh name="car1_mushr_ydlidar" file="mushr_ydlidar.stl"/>
   </asset>
   <default>
@@ -28,8 +29,9 @@
       <site name="car1_imu" pos="-0.005 0 .165"/>
 
       <geom pos="0 0 0.094655" type="mesh" mass="3.542137" mesh="car1_mushr_base_nano"  rgba="0.9 0.0 0.1 1"/>
+      <geom euler="1.604 3.75 0" pos="-0.013 0.03 0.094655" type="mesh" mass="0" conaffinity="0" contype="0" mesh="car1_shell_mesh" rgba="0.9 0.0 0.1 1"/>
       <geom name="car1_realsense_d435i" size="0.012525 0.045 0.0125" pos="0.0123949 0 0.162178" mass="0.072" type="box"/>
-      <geom name="car1_ydlidar" pos="-0.035325 0 0.202405" type="mesh" mass="0.180" mesh="car1_mushr_ydlidar"/>
+      <!-- <geom name="car1_ydlidar" pos="-0.035325 0 0.202405" type="mesh" mass="0.180" mesh="car1_mushr_ydlidar"/> -->
 
       <body name="car1_steering_wheel" pos="0.1385 0 0.0488">
         <joint class="car1_steering" name="car1_steering_wheel"/>
@@ -60,15 +62,14 @@
       </body>
     </body>
   </worldbody>
-  <!-- <actuator>
-    <position class="car1_steering" kp="25.0" name="car1_steering_pos" joint="car1_steering_wheel"/>
-    <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_velocity" tendon="car1_throttle"/>
-  </actuator> -->
   <actuator>
     <position class="car1_steering" kp="25.0" name="car1_steering_pos" joint="car1_steering_wheel"/>
-    <motor gear="15.0" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
-    <!-- <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_velocity" tendon="car1_throttle"/> -->
+    <velocity kv="100" gear="0.04" forcelimited="true" forcerange="-500 500" name="car1_throttle_velocity" tendon="car1_throttle"/>
   </actuator>
+  <!-- <actuator>
+    <position class="car1_steering" kp="25.0" name="car1_steering_pos" joint="car1_steering_wheel"/>
+    <motor gear="15.0" forcelimited="true" forcerange="-500 500" name="car1_throttle_acceleration" tendon="car1_current"/>
+  </actuator> -->
   
   <equality>
     <!-- taylor expansion of delta_l = arctan(L/(L/tan(delta) - W/2)) with L,W in reference to kinematic car model -->

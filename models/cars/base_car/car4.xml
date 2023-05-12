@@ -3,6 +3,7 @@
   <asset>
     <mesh name="car4_mushr_base_nano" file="mushr_base_nano.stl"/>
     <mesh name="car4_mushr_wheel" file="mushr_wheel.stl"/>
+    <mesh name="car4_shell_mesh" file="mesh_medpoly.stl" scale="0.29 0.29 0.29"/>
     <mesh name="car4_mushr_ydlidar" file="mushr_ydlidar.stl"/>
   </asset>
   <default>
@@ -25,8 +26,9 @@
       <site name="car4_imu" pos="-0.005 0 .165"/>
 
       <geom pos="0 0 0.094655" type="mesh" mass="3.542137" mesh="car4_mushr_base_nano" rgba="0.4 0.0 0.8 1"/>
+      <geom euler="1.604 3.75 0" pos="-0.013 0.03 0.094655" type="mesh" mass="0" conaffinity="0" contype="0" mesh="car3_shell_mesh" rgba="0.4 0.0 0.8 1"/>
       <geom name="car4_realsense_d435i" size="0.012525 0.045 0.0125" pos="0.0123949 0 0.162178" mass="0.072" type="box"/>
-      <geom name="car4_ydlidar" pos="-0.035325 0 0.202405" type="mesh" mass="0.180" mesh="car4_mushr_ydlidar"/>
+      <!-- <geom name="car4_ydlidar" pos="-0.035325 0 0.202405" type="mesh" mass="0.180" mesh="car4_mushr_ydlidar"/> -->
 
       <body name="car4_steering_wheel" pos="0.1385 0 0.0488">
         <joint class="car4_steering" name="car4_steering_wheel"/>

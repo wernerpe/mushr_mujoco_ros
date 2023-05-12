@@ -14,17 +14,17 @@
         <param name="mj_key" value="~/.mujoco/mjkey.txt" />
         <param name="model_file_path" value="$(find mushr_mujoco_ros)/models/$(arg environment).xml" />
         <param name="config_file_path" value="$(find mushr_mujoco_ros)/config/$(arg environment).yaml" />
-        <param name="car1/use_accel_control" value="true" />
+        <param name="car1/use_accel_control" value="false" />
         <param name="car2/use_accel_control" value="true" />
         <param name="car3/use_accel_control" value="true" />
         <param name="car4/use_accel_control" value="true" />
         <param name="viz" value="true" />
     </node>
 
-    <node pkg="velocity_estimator" name="state_pub1" type="state_pub.py" output="screen">
+    <node pkg="velocity_estimator" name="state_pub1" type="state_pub.py" args="--lag 0" output="screen">
         <param name="veh_id" value="1" />
     </node>
-    <node pkg="velocity_estimator" name="state_pub2" type="state_pub.py" output="screen">
+    <node pkg="velocity_estimator" name="state_pub2" type="state_pub.py" args="--lag 10" output="screen">
         <param name="veh_id" value="2" />
     </node>
     <node pkg="velocity_estimator" name="state_pub3" type="state_pub.py" output="screen">
@@ -44,14 +44,18 @@
     <node pkg="RLKartRacing" name="rankingnode" type="car_rank_publisher.py" args="--mushr 1" output="screen">
     </node>
     <!-- RL nodes -->
-    <node pkg="RLKartRacing" name="rlnode1" type="hierarchical_rl_agent.py" args="--car-id 1 --mushr 1 --maxv 4.5 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode1" type="hierarchical_rl_vel_heading_control.py" args="--car-id 1 --mushr 1 --max_v 4.5 --use_nr_ado_obs 3 --use_hl 1 --verbose 0" output="screen">
+    </node> 
+    <node pkg="RLKartRacing" name="rlnode2" type="hierarchical_rl_agent.py" args="--car-id 2 --mushr 1 --max_v 4.5 --use_nr_ado_obs 0 --use_hl 1" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode2" type="hierarchical_rl_agent.py" args="--car-id 2 --mushr 1 --maxv 4.5 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode3" type="hierarchical_rl_agent.py" args="--car-id 3 --mushr 1 --max_v 5.5 --use_nr_ado_obs 3 --use_hl 1" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode3" type="hierarchical_rl_agent.py" args="--car-id 3 --mushr 1 --maxv 5.5 --use_nr_ado_obs 3" output="screen">
+    <node pkg="RLKartRacing" name="rlnode4" type="hierarchical_rl_agent.py" args="--car-id 4 --mushr 1 --max_v 5.5 --use_nr_ado_obs 3 --use_hl 1" output="screen">
     </node>
-    <node pkg="RLKartRacing" name="rlnode4" type="hierarchical_rl_agent.py" args="--car-id 4 --mushr 1 --maxv 5.5 --use_nr_ado_obs 3" output="screen">
+
+    <node pkg="RLKartRacing" name="cmdnode1" type="car_cmd_republisher.py" args="--car-id 1 --mushr 1" output="screen">
     </node>
+    
 
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find RLKartRacing)/rviz/multiagent_hierarchical.rviz" />
     <!-- Launch  model/state publishers-->
